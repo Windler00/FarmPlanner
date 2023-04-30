@@ -1,0 +1,26 @@
+html, body {
+  margin: 0;
+  padding: 0;
+
+}
+
+.layout{
+  margin: 0 auto;
+  margin-left: 18vw;
+  overflow-y:hidden;
+  overflow-x: hidden;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+
+*::-webkit-scrollbar-thumb {
+  background-color: #7ed8c3;
+}
+
+ /* Works on Firefox */
+* {
+  scrollbar-color: rgb(126, 216, 195)rgb(255, 255, 255);
+}

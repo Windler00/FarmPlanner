@@ -1,0 +1,22 @@
+.SeedList {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.SeedList ul{
+    display: flex;
+}
+
+.SeedList button {
+    margin-left: 0px;
+}
+
+.SeedList li {
+    display: flex;
+}
+
+.SeedList button {
+    margin-left: 5px;
+}
+

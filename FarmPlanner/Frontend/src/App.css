@@ -1,0 +1,14 @@
+.header{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: baseline;
+    height: 10%;
+}
+.header a{
+    margin-left: 20px;
+}
+
+.app{
+    overflow-x: hidden;
+}

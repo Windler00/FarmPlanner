@@ -1,0 +1,41 @@
+.Field {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    overflow-x: hidden;
+}
+.FieldItem {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    width: 100%;
+    overflow-x: hidden;
+}
+.Modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Modal button{
+    margin-top: 5px;
+}
+.Modal input{
+    margin-top: 5px;
+}
+.Modal label {
+    margin-top: 5px;
+}
+.FieldName{
+    margin-top: 5px;
+}
+.FieldDescription{
+    margin-top: 5px;
+}
