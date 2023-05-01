@@ -33,12 +33,11 @@ class FieldStore {
     }
 
     async UpdateField(id, name, description){
-        const result = await axios.put(config.ApiUrl +'/api/field/', {
+        await axios.put(config.ApiUrl +'/api/field/', {
                 id: id,
                 name: name,
                 description: description
         });
-        this.setFieldById = result.data
         this.fetchAll()
     }
     

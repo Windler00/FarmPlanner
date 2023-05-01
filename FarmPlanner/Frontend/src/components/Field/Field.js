@@ -7,6 +7,7 @@ import RowList from "../RowList/RowList";
 import CustomInput from "../CustomInput/CustomInput";
 import { observer } from 'mobx-react-lite';
 import Modal from "../Modal/Modal";
+import LeftBarStore from "../../store/LeftBarStore";
 
 const Field = observer(() => {
     //input for create field
@@ -34,8 +35,18 @@ const Field = observer(() => {
         return navigate("/")
     }
 
+    async function handleFieldUpdate(id, name, description){
+        await FieldStore.UpdateField(id, name, description)
+        await FieldStore.fetchById(params.id);
+        setShowModal(false)
+    }
+
+    const marginIfActive = {
+        marginLeft: LeftBarStore.isActive ? '350px' : '0px'
+      };
+
     return(
-        <div className={styles.Field}>
+        <div style={marginIfActive} className={styles.Field}>
             <div className={styles.FieldItem}>
             {FieldStore.fieldById == null ? (
                 <></>
@@ -58,7 +69,7 @@ const Field = observer(() => {
                             </strong>
                         </div>
                         <CustomInput labelText="Описание" value={createFieldDescription} handleChange={ChangeCreateFieldDescription}></CustomInput>
-                        <CustomButton label="Изменить" onClick={() => {FieldStore.UpdateField(FieldStore.fieldById.id, createFieldName, createFieldDescription);setShowModal(false)}}/>
+                        <CustomButton label="Изменить" onClick={() => {handleFieldUpdate(FieldStore.fieldById.id, createFieldName, createFieldDescription)}}/>
                 </Modal>
             </>
             )}

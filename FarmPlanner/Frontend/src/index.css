@@ -6,8 +6,7 @@ html, body {
 
 .layout{
   margin: 0 auto;
-  margin-left: 18vw;
-  overflow-y:hidden;
+  overflow-y: hidden;
   overflow-x: hidden;
 }
 

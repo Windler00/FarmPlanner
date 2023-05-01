@@ -6,16 +6,18 @@
     bottom: 0;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 18vw;
+    width: 350px;
     position:fixed;
     overflow-y: scroll;
     overflow-x: hidden;
+    margin-top: 100px;
   }
   
   .FieldList ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    width: 100%;
   }
 
   
@@ -29,7 +31,7 @@
   }
 
   .inputBlock{
-    width: 15vw;
+    width: 100%;
   }
 
   .inputBlock label{
