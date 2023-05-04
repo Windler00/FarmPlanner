@@ -9,11 +9,12 @@ class RowStore {
         makeAutoObservable(this);
     }
 
-    async postRow(name, description, fieldId) {
+    async postRow(name, description, length, fieldId) {
         const result = await axios.post(config.ApiUrl +'/api/row/', {
             name: name,
             description: description,
-            fieldId: fieldId
+            length: length,
+            fieldId: fieldId,
         });
         this.setRowList(result.data)
     }

@@ -29,7 +29,7 @@ namespace FarmPlanner.Controllers
         }
         //work
         [HttpGet]
-        public IEnumerable Get()
+        public IEnumerable GetAll()
         {
             return GetAllFields();
         }

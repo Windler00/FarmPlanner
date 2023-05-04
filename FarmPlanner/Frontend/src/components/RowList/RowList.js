@@ -28,6 +28,11 @@ const RowList = observer((props) => {
      setCreateRowDescription(event.target.value);
    }
 
+   const [createRowLength, setRowLength] = useState(1);
+   function ChangeRowLength(event){
+    setRowLength(event.target.value);
+  }
+
   let params = useParams();
   let location = useLocation();
     
@@ -35,8 +40,8 @@ const RowList = observer((props) => {
         RowStore.fetchById(params.id)
       },[location]);
 
-  async function postNewRow(name, description, fieldId){
-    await RowStore.postRow(name, description, fieldId)
+  async function postNewRow(name, description, length, fieldId){
+    await RowStore.postRow(name, description, length, fieldId)
     await RowStore.fetchById(params.id)
   }
 
@@ -57,9 +62,10 @@ const RowList = observer((props) => {
         <div className={styles}>
           <CustomButton label="Создать ряд" onClick={() => {setShowModal(true)}}/>
           <Modal active={showModal} setActive={setShowModal}>
-              <CustomInput  labelText="Имя" value={createRowName} handleChange={ChangeCreateRowName}></CustomInput>
-              <CustomInput labelText="Описание" value={createRowDescription} handleChange={ChangeCreateRowDescription}></CustomInput>
-              <CustomButton label="Создать" onClick={() => {postNewRow(createRowName, createRowDescription, props.fieldId); setShowModal(false)}}/>
+              <CustomInput  labelText="Имя" value={createRowName} handleChange={ChangeCreateRowName}/>
+              <CustomInput labelText="Описание" value={createRowDescription} handleChange={ChangeCreateRowDescription}/>
+              <CustomInput labelText="Длинна" value={createRowLength} handleChange={ChangeRowLength}/>
+              <CustomButton label="Создать" onClick={() => {postNewRow(createRowName, createRowDescription, createRowLength, props.fieldId); setShowModal(false)}}/>
           </Modal>
           </div>
       )
@@ -86,9 +92,10 @@ const RowList = observer((props) => {
           <Modal active={showCreateModal} setActive={setShowCreateModal}>
             <div className={styles.Modal}>
               <strong>Создать Ряд</strong>
-              <CustomInput labelText="Имя" value={createRowName} handleChange={ChangeCreateRowName}></CustomInput>
-              <CustomInput labelText="Описание" value={createRowDescription} handleChange={ChangeCreateRowDescription}></CustomInput>
-              <CustomButton label="Создать" onClick={() => {postNewRow(createRowName, createRowDescription, props.fieldId); setShowCreateModal(false)}}/>
+              <CustomInput labelText="Имя" value={createRowName} handleChange={ChangeCreateRowName}/>
+              <CustomInput labelText="Описание" value={createRowDescription} handleChange={ChangeCreateRowDescription}/>
+              <CustomInput labelText="Длинна" value={createRowLength} handleChange={ChangeRowLength}/>
+              <CustomButton label="Создать" onClick={() => {postNewRow(createRowName, createRowDescription, createRowLength, props.fieldId); setShowCreateModal(false)}}/>
             </div>
           </Modal>
         </div>
