@@ -54,7 +54,7 @@ const Field = observer(() => {
             :
             (
             <>
-                <CustomButton label={FieldStore.fieldById.name} onClick={() => setShowModal(true)}/>
+                <CustomButton label={FieldStore.fieldById.name + FieldStore.fieldById.description} onClick={() => setShowModal(true)}/>
                 <Modal active={showModal} setActive={setShowModal}>
                         <CustomButton label="Удалить" onClick={() => {FieldStore.DeleteField(params.id); redirectToHome(); setShowModal(false)}}/>
                         <div className={styles.FieldName}>

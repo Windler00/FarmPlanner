@@ -41,7 +41,7 @@ function ChangeCreateSeedQuantity(event){
      
     function validateRowId(seed, index){
         if (seed.rowId === props.rowId){
-            return (<CustomButton id={seed.id} label={index+1 + " "+ seed.name + " "+ seed.description} onClick={() => {openEditModal(seed.id)}}/>)
+            return (<CustomButton id={seed.id} label={index+1 + " "+ seed.name} onClick={() => {openEditModal(seed.id)}}/>)
         }
     }
 

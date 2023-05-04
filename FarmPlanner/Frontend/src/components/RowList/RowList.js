@@ -74,7 +74,7 @@ const RowList = observer((props) => {
         <div className={styles.RowList}>
         {RowStore.rowById.map((row) => 
           <div key={row.id} className={styles.RowItem}>
-            <CustomButton id={row.id} label={row.name} onClick={() => {setModalId(row.id);setModalName(row.name);setModalDescription(row.description);setShowModal(true)}}/>
+            <CustomButton id={row.id} label={row.id + " " + row.name + " " + row.description} onClick={() => {setModalId(row.id);setModalName(row.name);setModalDescription(row.description);setShowModal(true)}}/>
             <SeedList rowId={row.id}></SeedList>
           </div>
         )}
