@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections;
 using static FarmPlanner.Services.RowService;
+using static FarmPlanner.Services.SeedService;
 
 namespace FarmPlanner.Controllers
 {
@@ -14,6 +15,7 @@ namespace FarmPlanner.Controllers
         public IActionResult Post(Row newRow)
         {
             var result = AddRow(newRow);
+            FillSeedList(newRow.Id);
             if (result == "this id is already in use")
             {
                 return BadRequest("this id is already in use");
@@ -21,14 +23,8 @@ namespace FarmPlanner.Controllers
             return Ok(result);
         }
         //work
-        [HttpGet]
-        public IEnumerable Get()
-        {
-            return GetAllRows();
-        }
-        //work
         [HttpGet("{id}")]
-        public IActionResult GetOne(int id)
+        public IActionResult GetByFieldId(int id)
         {
             var result = GetRowByFieldId(id);
             if (result == null)

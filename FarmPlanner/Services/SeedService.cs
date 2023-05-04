@@ -4,20 +4,23 @@ namespace FarmPlanner.Services
 {
     public class SeedService
     {
-        public static object AddSeed(Seed seed)
+        public static void FillSeedList(int rowId)
         {
             using (AppContext db = new AppContext())
             {
-                db.Seeds.Add(seed);
+                Row currRow = db.Rows.Find(rowId);
+                for(int i=0;i < currRow.Length; i++)
+                {
+                    Seed newSeed = new Seed();
+                    newSeed.Name = "";
+                    newSeed.IsPlanted = false;
+                    newSeed.DateYear = DateTime.UtcNow.Year;
+                    newSeed.DateMonth = DateTime.UtcNow.Month;
+                    newSeed.DateDay = DateTime.UtcNow.Day;
+                    newSeed.RowId = rowId;
+                    db.Seeds.Add(newSeed);
+                }
                 db.SaveChanges();
-                return seed;
-            }
-        }
-        public static List<Seed> GetAllSeeds()
-        {
-            using (AppContext db = new AppContext())
-            {
-                return db.Seeds.ToList();
             }
         }
 

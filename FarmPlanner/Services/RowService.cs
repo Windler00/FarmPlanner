@@ -15,14 +15,6 @@ namespace FarmPlanner.Services
             }
         }
 
-        public static List<Row> GetAllRows()
-        {
-            using (AppContext db = new AppContext())
-            {
-                return db.Rows.ToList();
-            }
-        }
-
         public static List<Row> GetRowByFieldId(int id)
         {
             using (AppContext db = new AppContext())
