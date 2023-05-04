@@ -4,7 +4,7 @@ namespace FarmPlanner.Services
 {
     public class SeedService
     {
-        public static void FillSeedList(int rowId)
+        public static async Task FillSeedList(int rowId)
         {
             using (AppContext db = new AppContext())
             {
@@ -24,7 +24,7 @@ namespace FarmPlanner.Services
             }
         }
 
-        public static object GetSeedByRowId(int rowId)
+        public static async Task<object> GetSeedByRowId(int rowId)
         {
             using (AppContext db = new AppContext())
             {
@@ -34,7 +34,7 @@ namespace FarmPlanner.Services
             }
         }
 
-        public static object UpdateSeed(Seed seed)
+        public static async Task<object> UpdateSeed(Seed seed)
         {
             using (AppContext db = new AppContext())
             {
@@ -52,7 +52,7 @@ namespace FarmPlanner.Services
             }
         }
 
-        public static object DeleteSeed(Seed seed)
+        public static async Task<object> DeleteSeed(Seed seed)
         {
             using (AppContext db = new AppContext())
             {
@@ -71,7 +71,7 @@ namespace FarmPlanner.Services
             }
         }
 
-        public static void DeleteByRowId(int rowId)
+        public static async Task DeleteByRowId(int rowId)
         {
             using (AppContext db = new AppContext())
             {

@@ -11,21 +11,20 @@ namespace FarmPlanner.Controllers
     {
         //work
         [HttpGet("{id}")]
-        public IActionResult GetByRowId(int id)
+        public async Task<IActionResult> GetByRowId(int id)
         {
-            var result = GetSeedByRowId(id);
+            var result = await GetSeedByRowId(id);
             if (result == null)
             {
                 BadRequest();
             }
-
             return Ok(result);
         }
         //work
         [HttpPut]
-        public IActionResult Update(Seed seed)
+        public async Task<IActionResult> Update(Seed seed)
         {
-            var result = UpdateSeed(seed);
+            var result = await UpdateSeed(seed);
             if (result == null)
             {
                 return BadRequest();

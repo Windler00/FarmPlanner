@@ -11,7 +11,7 @@ namespace FarmPlanner.Controllers
     {
         //work
         [HttpPost]
-        public IActionResult Post(Field newField)
+        public async Task<IActionResult> Post(Field newField)
         {
             var result = AddField(newField);
             if (result == "this id is already in use")
@@ -29,13 +29,13 @@ namespace FarmPlanner.Controllers
         }
         //work
         [HttpGet]
-        public IEnumerable GetAll()
+        public async Task<IEnumerable> GetAll()
         {
             return GetAllFields();
         }
         //work
         [HttpGet("{id}")]
-        public IActionResult GetOne(int id)
+        public async Task<IActionResult> GetOne(int id)
         {
             var result = GetFieldById(id);
             if(result == "Not found")
@@ -46,13 +46,13 @@ namespace FarmPlanner.Controllers
         }
         //work
         [HttpPut]
-        public IActionResult Update(Field field)
+        public async Task<IActionResult> Update(Field field)
         {
             return Ok(UpdateField(field));
         }
         //work
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             using (AppContext db = new AppContext())
             {
