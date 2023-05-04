@@ -28,7 +28,7 @@ namespace FarmPlanner.Services
         {
             using (AppContext db = new AppContext())
             {
-                var result = db.Seeds.FirstOrDefault(e => e.RowId == rowId);
+                var result = db.Seeds.Where(e => e.RowId == rowId).ToList();
                 return result;
 
             }

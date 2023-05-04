@@ -1,8 +1,9 @@
 button {
     border: 1px solid #7ed8c3;
     border-radius: 4px;
-    padding: 8px;
     font-size: 16px;
+    height: 55px;
+    width: 90px;
   }
 
 button:hover {

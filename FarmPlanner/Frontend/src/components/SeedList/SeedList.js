@@ -29,33 +29,33 @@ function ChangeCreateSeedQuantity(event){
 
     let location = useLocation()
       useEffect(() => {
-        SeedStore.fetchAll()
+        SeedStore.fetchById(props.rowId)
       },[location,]); 
 
       async function handleSeedUpdate(event){
         let id = event.target.id
         await SeedStore.updateSeed(id ,createSeedName)
-        await SeedStore.fetchAll()
+        await SeedStore.fetchById(props.rowId)
         setShowEditModal(false)
       }
      
-    function validateRowId(seed){
+    function validateRowId(seed, index){
         if (seed.rowId === props.rowId){
-            return (<CustomButton id={seed.id} label={seed.name} onClick={() => {openEditModal(seed.id)}}/>)
+            return (<CustomButton id={seed.id} label={index+1 + " "+ seed.name + " "+ seed.description} onClick={() => {openEditModal(seed.id)}}/>)
         }
     }
 
         return (
             <div className={styles.SeedList}>
-                {SeedStore.seedList.length === 0 ? (
+                {SeedStore.seedsById.length === 0 ? (
                     <></>
                 )
                 :
                 (
                 <ul>
-                    {SeedStore.seedList.map((seed) => 
+                    {SeedStore.seedsById.map((seed, index) => 
                         <li key={seed.id}>
-                            {validateRowId(seed)}
+                            {validateRowId(seed, index)}
                         </li>
                     )}
                     <Modal active={showEditModal} setActive={setShowEditModal}>
@@ -64,14 +64,6 @@ function ChangeCreateSeedQuantity(event){
                     </Modal>
                 </ul>
                 )}
-                <>
-                    <CustomButton label="+" onClick={() => setShowModal(true)}/>
-                    <Modal active={showModal} setActive={setShowModal}>
-                            <CustomInput labelText="Имя" value={createSeedName} handleChange={ChangeCreateSeedName}></CustomInput>
-                            <CustomInput labelText="Количество " value={createSeedQuantity} handleChange={ChangeCreateSeedQuantity}></CustomInput>
-                            <CustomButton label="Создать" onClick={() => {SeedStore.postSeed(createSeedName, props.rowId, createSeedQuantity); setShowModal(false);}}/>
-                    </Modal>
-                 </>
             </div>
         )
     

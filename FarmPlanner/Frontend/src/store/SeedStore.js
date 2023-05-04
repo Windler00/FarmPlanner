@@ -27,7 +27,7 @@ class SeedStore {
 
     async fetchById(id) {
         const result = await axios.get(config.ApiUrl +'/api/seed/' + id);
-        this.seedsById = result.data
+        this.seedsById = result.data.sort((a, b) => a.id - b.id);
     }
 
     async fetchAll() {
