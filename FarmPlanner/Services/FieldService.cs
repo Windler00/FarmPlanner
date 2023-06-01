@@ -58,6 +58,10 @@ namespace FarmPlanner.Services
                 {
                     toChange.Name = field.Name;
                     toChange.Description = field.Description;
+                    toChange.Length = field.Length;
+                    toChange.Width = field.Width;
+                    toChange.SchemaId = field.SchemaId;
+                    toChange.SchemaRow = field.SchemaRow;
                     db.SaveChanges();
                 }
                 return toChange;

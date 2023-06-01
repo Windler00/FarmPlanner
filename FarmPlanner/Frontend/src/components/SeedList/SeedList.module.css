@@ -1,7 +1,6 @@
 .SeedList {
     display: flex;
     flex-direction: row;
-    align-items: center;
 }
 
 .SeedList ul{
@@ -12,3 +11,41 @@
     display: flex;
 }
 
+.CategoriesList{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 300px;
+}
+
+.SeedInfo{
+    display: flex;
+    flex-direction: column;
+}
+
+.SeedInfo{
+    display: flex;
+    flex-direction: column;
+}
+.SeedInfo strong{
+    margin-top: 4px;
+    margin-left: 10px;
+}
+
+.Level1 li{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.Level2 li{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.Level3{
+    display: flex;
+    flex-direction: column;
+    
+}

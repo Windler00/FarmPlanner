@@ -36,6 +36,10 @@ namespace FarmPlanner.Services
                 var toChange = db.Rows.Find(row.Id);
                 toChange.Name = row.Name;
                 toChange.Description = row.Description;
+                UpdateSeedList(row);
+                toChange.Quantity = row.Quantity;
+                toChange.Length = row.Length;
+                toChange.Width = row.Width;
                 db.SaveChanges();
                 return row;
             }

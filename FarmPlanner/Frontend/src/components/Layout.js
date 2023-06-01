@@ -1,10 +1,19 @@
+import { observer } from "mobx-react-lite";
+import LeftBarStore from "../store/LeftBarStore";
+import FieldList from "./FieldList/FieldList";
 import Header from "./Header";
 
-export default function Layout(props){
+const Layout = observer((props) =>{
+
     return(
         <div className="layout">
+            {LeftBarStore.isActive && (
+                <FieldList/>
+            )}
             <Header/>
             {props.children}
         </div>
     )
-}
+})
+
+export default Layout;

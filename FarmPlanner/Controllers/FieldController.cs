@@ -9,7 +9,6 @@ namespace FarmPlanner.Controllers
     [ApiController]
     public class FieldController : ControllerBase
     {
-        //work
         [HttpPost]
         public async Task<IActionResult> Post(Field newField)
         {
@@ -27,13 +26,11 @@ namespace FarmPlanner.Controllers
                 return Ok(result);
             }
         }
-        //work
         [HttpGet]
         public async Task<IEnumerable> GetAll()
         {
             return await GetAllFields();
         }
-        //work
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOne(int id)
         {
@@ -44,13 +41,11 @@ namespace FarmPlanner.Controllers
             }
             return Ok(result);
         }
-        //work
         [HttpPut]
         public async Task<IActionResult> Update(Field field)
         {
             return Ok(await UpdateField(field));
         }
-        //work
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

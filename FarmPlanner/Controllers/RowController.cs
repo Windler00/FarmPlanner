@@ -10,7 +10,6 @@ namespace FarmPlanner.Controllers
     [ApiController]
     public class RowController : ControllerBase
     {
-        //work
         [HttpPost]
         public async Task<IActionResult> Post(Row newRow)
         {
@@ -22,7 +21,16 @@ namespace FarmPlanner.Controllers
             }
             return Ok(result);
         }
-        //work
+        [HttpGet]
+        public async Task<IActionResult> GetRows()
+        {
+            using (AppContext db = new AppContext())
+            {
+                var rows = db.Rows.ToList();
+                return Ok(rows);
+            }
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByFieldId(int id)
         {
@@ -33,7 +41,6 @@ namespace FarmPlanner.Controllers
             }
             return Ok(result);
         }
-        //work
         [HttpPut]
         public async Task<IActionResult> Update(Row row)
         {
@@ -47,7 +54,6 @@ namespace FarmPlanner.Controllers
                 return Ok(result);
             }
         }
-        //work
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
