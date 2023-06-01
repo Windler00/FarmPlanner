@@ -1,13 +1,15 @@
-html, body {
+html, body, #root {
+  width: 100%;
   margin: 0;
   padding: 0;
-
+  overflow-x: hidden;
 }
 
 .layout{
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   overflow-y: hidden;
-  overflow-x: hidden;
+  overflow-x: scroll;
 }
 
 *::-webkit-scrollbar {

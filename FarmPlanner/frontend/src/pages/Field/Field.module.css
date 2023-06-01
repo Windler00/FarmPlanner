@@ -1,16 +1,26 @@
 .Field {
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
-    width: 100%;
+    min-width: calc(100% + 350px);
+    flex-grow: 1;
     overflow-x: hidden;
+    border: 1px solid #7ed8c3;
+    font-size: 16px;
+    padding: 6px;
 }
 .FieldItem {
     display: flex;
     flex-direction: column;
     margin-left: 10px;
-    width: 100vw;
     overflow-x: hidden;
+}
+.FieldInfo {
+    display: flex;
+    flex-direction: row;
+}
+.FieldInfo strong{
+    margin-top: 10px;
+    margin-left: 20px;
 }
 .Modal {
     position: absolute;

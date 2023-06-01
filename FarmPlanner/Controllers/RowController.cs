@@ -10,34 +10,41 @@ namespace FarmPlanner.Controllers
     [ApiController]
     public class RowController : ControllerBase
     {
-        //work
         [HttpPost]
-        public IActionResult Post(Row newRow)
+        public async Task<IActionResult> Post(Row newRow)
         {
-            var result = AddRow(newRow);
-            FillSeedList(newRow.Id);
+            var result = await AddRow(newRow);
+            await FillSeedList(newRow.Id);
             if (result == "this id is already in use")
             {
                 return BadRequest("this id is already in use");
             }
             return Ok(result);
         }
-        //work
-        [HttpGet("{id}")]
-        public IActionResult GetByFieldId(int id)
+        [HttpGet]
+        public async Task<IActionResult> GetRows()
         {
-            var result = GetRowByFieldId(id);
+            using (AppContext db = new AppContext())
+            {
+                var rows = db.Rows.ToList();
+                return Ok(rows);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByFieldId(int id)
+        {
+            var result = await GetRowByFieldId(id);
             if (result == null)
             {
                 return NotFound();
             }
             return Ok(result);
         }
-        //work
         [HttpPut]
-        public IActionResult Update(Row row)
+        public async Task<IActionResult> Update(Row row)
         {
-            var result = UpdateRow(row);
+            var result = await UpdateRow(row);
             if (result == null)
             {
                 return BadRequest();
@@ -47,11 +54,10 @@ namespace FarmPlanner.Controllers
                 return Ok(result);
             }
         }
-        //work
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return Ok(DeleteRow(id));
+            return Ok(await DeleteRow(id));
         }
     }
 }
