@@ -9,29 +9,23 @@ namespace FarmPlanner.Controllers
     [ApiController]
     public class SeedController : ControllerBase
     {
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            using (AppContext db = new AppContext())
-            {
-                var result = db.Seeds.ToList();
-                return Ok(result);
-            }
-        }
+        //work
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByRowId(int id)
+        public IActionResult GetByRowId(int id)
         {
-            var result = await GetSeedsByRowId(id);
+            var result = GetSeedByRowId(id);
             if (result == null)
             {
                 BadRequest();
             }
+
             return Ok(result);
         }
+        //work
         [HttpPut]
-        public async Task<IActionResult> Update(Seed seed)
+        public IActionResult Update(Seed seed)
         {
-            var result = await UpdateSeed(seed);
+            var result = UpdateSeed(seed);
             if (result == null)
             {
                 return BadRequest();

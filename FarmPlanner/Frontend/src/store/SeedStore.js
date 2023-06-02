@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { makeAutoObservable, runInAction } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 import config from '../config';
-import RowStore from './RowStore';
+
 class SeedStore {
     seedList = [];
     seedsById = [];
@@ -18,35 +18,21 @@ class SeedStore {
         this.fetchAll()
     }
 
-    async updateSeed(id, name, day , month, year,  isPlanted, length, height, width,){
+    async updateSeed(id, name){
         await axios.put(config.ApiUrl +'/api/seed/', {
-            id: id,
-            name: name,
-            dateYear: year,
-            dateMonth: month,
-            dateDay: day,
-            isPlanted: isPlanted,
-            length: length,
-            height: height,
-            width: width,
+                id: id,
+                name: name,
         });
-        this.fetchByIds();
     }
 
-    async fetchByIds() {
-        this.seedsById = new Array()
-        for(const id of RowStore.currRowIds){
-            let result = await axios.get(config.ApiUrl +'/api/seed/'+ id)
-            await result.data.sort((a, b) => a.id - b.id)
-            await result.data.map(async (seed) => {
-                runInAction(() => {this.seedsById.push(seed)})
-            })
-        }
+    async fetchById(id) {
+        const result = await axios.get(config.ApiUrl +'/api/seed/' + id);
+        this.seedsById = result.data
     }
 
     async fetchAll() {
         const result = await axios.get(config.ApiUrl +'/api/seed/');
-        runInAction(() => {this.setSeedList(result.data)})
+        this.setSeedList(result.data)
     }
     
     setSeedList(seedList) {

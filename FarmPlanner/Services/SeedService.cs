@@ -4,12 +4,12 @@ namespace FarmPlanner.Services
 {
     public class SeedService
     {
-        public static async Task FillSeedList(int rowId)
+        public static void FillSeedList(int rowId)
         {
             using (AppContext db = new AppContext())
             {
                 Row currRow = db.Rows.Find(rowId);
-                for(int i=0;i < currRow.Quantity; i++)
+                for(int i=0;i < currRow.Length; i++)
                 {
                     Seed newSeed = new Seed();
                     newSeed.Name = "";
@@ -24,58 +24,17 @@ namespace FarmPlanner.Services
             }
         }
 
-        public static async Task UpdateSeedList(Row row)
+        public static object GetSeedByRowId(int rowId)
         {
             using (AppContext db = new AppContext())
             {
-                Row currRow = db.Rows.Find(row.Id);
-                if (currRow.Quantity < row.Quantity)
-                {
-                    int count = row.Quantity - currRow.Quantity;
-                    for (int i = 0; i < count; i++)
-                    {
-                        Seed newSeed = new Seed();
-                        newSeed.Name = "";
-                        newSeed.IsPlanted = false;
-                        newSeed.DateYear = DateTime.UtcNow.Year;
-                        newSeed.DateMonth = DateTime.UtcNow.Month;
-                        newSeed.DateDay = DateTime.UtcNow.Day;
-                        newSeed.RowId = row.Id;
-                        db.Seeds.Add(newSeed);
-                    }
-                }
-                else if (currRow.Quantity > row.Quantity)
-                {
-                    int count = currRow.Quantity - row.Quantity;
-                    for (int i = 0; i < count ; i++)
-                    {
-                        List<Seed> seedList = db.Seeds.Where(s => s.RowId == row.Id).ToList();
-                        Seed seed = seedList.Last();
-                        db.Remove(seed);
-                        db.SaveChanges();
-                    }
-                }
-                else
-                {
-                    return;
-                }
-                db.SaveChanges();
-            }
-        }
-
-        public static async Task<object> GetSeedsByRowId(int rowId)
-        {
-            using (AppContext db = new AppContext())
-            {
-                {
-                    var result = db.Seeds.Where(e => e.RowId == rowId).ToList();
-                    return result;
-                }
+                var result = db.Seeds.FirstOrDefault(e => e.RowId == rowId);
+                return result;
 
             }
         }
 
-        public static async Task<object> UpdateSeed(Seed seed)
+        public static object UpdateSeed(Seed seed)
         {
             using (AppContext db = new AppContext())
             {
@@ -83,13 +42,6 @@ namespace FarmPlanner.Services
                 if (toChange != null)
                 {
                     toChange.Name = seed.Name;
-                    toChange.DateDay = seed.DateDay;
-                    toChange.DateMonth = seed.DateMonth;
-                    toChange.DateYear = seed.DateYear;
-                    toChange.IsPlanted = seed.IsPlanted;
-                    toChange.Length = seed.Length;
-                    toChange.Width = seed.Width;
-                    toChange.Height = seed.Height;
                     db.SaveChanges();
                     return seed;
                 }
@@ -100,7 +52,7 @@ namespace FarmPlanner.Services
             }
         }
 
-        public static async Task<object> DeleteSeed(Seed seed)
+        public static object DeleteSeed(Seed seed)
         {
             using (AppContext db = new AppContext())
             {
@@ -119,7 +71,7 @@ namespace FarmPlanner.Services
             }
         }
 
-        public static async Task DeleteByRowId(int rowId)
+        public static void DeleteByRowId(int rowId)
         {
             using (AppContext db = new AppContext())
             {

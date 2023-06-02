@@ -1,13 +1,8 @@
 button {
     border: 1px solid #7ed8c3;
     border-radius: 4px;
-    font-size: 16px;
     padding: 8px;
-    min-height: 36px;
-    min-width: 96px;
-    max-width: 100px;
-    word-wrap: break-word;
-    cursor: pointer;
+    font-size: 16px;
   }
 
 button:hover {

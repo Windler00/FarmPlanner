@@ -8,16 +8,16 @@ import CustomButton from '../CustomButton/CustomButton';
 import CustomInput from '../CustomInput/CustomInput';
 import { observer, } from 'mobx-react-lite';
 import Modal from '../Modal/Modal';
-import SeedStore from '../../store/SeedStore';
-import CategoriesStore from '../../store/CategoriesStore';
-import { InputNumber } from 'antd';
 
 const RowList = observer((props) => {
   const [showModal, setShowModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   const [modalId, setModalId] = useState(null);
+  const [modalName, setModalName] = useState("");
+  const [modalDescription, setModalDescription] = useState("");
 
+   //input for create row
    const [createRowName, setCreateRowName] = useState("");
    function ChangeCreateRowName(event){
      setCreateRowName(event.target.value);
@@ -28,32 +28,21 @@ const RowList = observer((props) => {
      setCreateRowDescription(event.target.value);
    }
 
-   const [createRowQuantity, setRowQuantity] = useState(0);
-
-  const [currRowQuantity, setCurrRowQuantity] = useState(0);
-
-  const [rowLength, setRowLength] = useState(0)
-  const [rowWidth, setRowWidth] = useState(0)
+   const [createRowLength, setRowLength] = useState(1);
+   function ChangeRowLength(event){
+    setRowLength(event.target.value);
+  }
 
   let params = useParams();
   let location = useLocation();
     
       useEffect(() => {
-        const fetchData = async () => {
-          await RowStore.fetchById(params.id)
-          await SeedStore.fetchByIds()
-          await CategoriesStore.getLevel1()
-          await CategoriesStore.getLevel2()
-          await CategoriesStore.getLevel3()
-        }
-      
-        fetchData();
+        RowStore.fetchById(params.id)
       },[location]);
 
-  async function postNewRow(name, description, quantity, fieldId){
-    await RowStore.postRow(name, description, quantity, fieldId)
+  async function postNewRow(name, description, length, fieldId){
+    await RowStore.postRow(name, description, length, fieldId)
     await RowStore.fetchById(params.id)
-    SeedStore.fetchByIds()
   }
 
   async function handleRowDelete(){
@@ -62,13 +51,11 @@ const RowList = observer((props) => {
     setShowModal(false)
   }
 
-  async function handleRowUpdate(id,name,description, quantity, length, width){
-    await RowStore.UpdateRow(id,name,description, quantity, length, width)
+  async function handleRowUpdate(id,name,description){
+    await RowStore.UpdateRow(id,name,description)
     await RowStore.fetchById(params.id)
-    SeedStore.fetchByIds()
     setShowModal(false)
   }
-
     return (
     <>
       {RowStore.rowById.length === 0 ? (
@@ -77,80 +64,38 @@ const RowList = observer((props) => {
           <Modal active={showModal} setActive={setShowModal}>
               <CustomInput  labelText="Имя" value={createRowName} handleChange={ChangeCreateRowName}/>
               <CustomInput labelText="Описание" value={createRowDescription} handleChange={ChangeCreateRowDescription}/>
-              <div>
-				<strong>Колличество: </strong>
-				<InputNumber min={0} defaultValue={createRowQuantity} onChange={setRowQuantity}/>
-		  	  </div>
-              <CustomButton label="Создать" onClick={() => {postNewRow(createRowName, createRowDescription, createRowQuantity, props.fieldId); setShowModal(false)}}/>
+              <CustomInput labelText="Длинна" value={createRowLength} handleChange={ChangeRowLength}/>
+              <CustomButton label="Создать" onClick={() => {postNewRow(createRowName, createRowDescription, createRowLength, props.fieldId); setShowModal(false)}}/>
           </Modal>
           </div>
       )
       :
       (
         <div className={styles.RowList}>
-        {RowStore.rowById.map((row, index) => 
+        {RowStore.rowById.map((row) => 
           <div key={row.id} className={styles.RowItem}>
-            <div className={styles.RowInfo}>
-              <CustomButton id={row.id} label={index+1 + ") " + row.name} onClick={() => {setModalId(row.id);
-                                                                                          setCreateRowName(row.name);
-                                                                                          setCreateRowDescription(row.description);
-                                                                                          setCurrRowQuantity(row.quantity);
-                                                                                          setRowLength(row.length);
-                                                                                          setRowWidth(row.width);
-                                                                                          setShowModal(true)}}/>
-              <strong>Описание: {row.description}</strong>
-              <strong>Колличество: {row.quantity}</strong>
-			  <strong>Длинна(см): {row.length}</strong>
-			  <strong>Ширина(см): {row.width}</strong>
-            </div>
-            <SeedList rowId={row.id}/>
+            <CustomButton id={row.id} label={row.name} onClick={() => {setModalId(row.id);setModalName(row.name);setModalDescription(row.description);setShowModal(true)}}/>
+            <SeedList rowId={row.id}></SeedList>
           </div>
         )}
 
         <Modal active={showModal} setActive={setShowModal}>
           <strong>Ряд</strong>
           <CustomButton label="Удалить" onClick={handleRowDelete}/>
-          <CustomInput labelText={"Имя: " + createRowName} value={createRowName} handleChange={ChangeCreateRowName}></CustomInput>
-          <CustomInput labelText={"Описание: " + createRowDescription} value={createRowDescription} handleChange={ChangeCreateRowDescription}></CustomInput>
-		  <div>
-			<strong>Колличество: </strong>
-			<InputNumber min={0} defaultValue={currRowQuantity} onChange={setCurrRowQuantity}/>
-		  </div>
-          <div>
-            <strong>Длинна ряда(см): </strong>
-            <InputNumber min={0} defaultValue={rowLength} onChange={setRowLength}/>
-          </div>
-          <div>
-            <strong>Ширина ряда(см): </strong>
-            <InputNumber min={0} defaultValue={rowWidth} onChange={setRowWidth}/>
-          </div>
-
-          <CustomButton label="Изменить" onClick={() => {handleRowUpdate(modalId,
-                                                                         createRowName,
-                                                                         createRowDescription,
-                                                                         currRowQuantity,
-                                                                         rowLength,
-                                                                         rowWidth
-                                                                         )}}/>
+          <CustomInput labelText={"Имя: " + modalName} value={createRowName} handleChange={ChangeCreateRowName}></CustomInput>
+          <CustomInput labelText={"Описание: " + modalDescription} value={createRowDescription} handleChange={ChangeCreateRowDescription}></CustomInput>
+          <CustomButton label="Изменить" onClick={() => {handleRowUpdate(modalId, createRowName, createRowDescription)}}/>
         </Modal>
 
         <div className={styles.RowItem}>
-          <CustomButton label="Создать ряд" onClick={() => {setCreateRowName(""); setCreateRowDescription("");setShowCreateModal(true)}}/>
+          <CustomButton label="Создать ряд" onClick={() => {setShowCreateModal(true)}}/>
           <Modal active={showCreateModal} setActive={setShowCreateModal}>
             <div className={styles.Modal}>
               <strong>Создать Ряд</strong>
               <CustomInput labelText="Имя" value={createRowName} handleChange={ChangeCreateRowName}/>
               <CustomInput labelText="Описание" value={createRowDescription} handleChange={ChangeCreateRowDescription}/>
-              <div>
-				<strong>Колличество: </strong>
-				<InputNumber min={0} defaultValue={createRowQuantity} onChange={setRowQuantity}/>
-		  	  </div>
-              <CustomButton label="Создать" onClick={() => {postNewRow(createRowName,
-                                                                       createRowDescription,
-                                                                       createRowQuantity,
-                                                                       props.fieldId);
-																	   setRowQuantity(0);
-                                                                       setShowCreateModal(false)}}/>
+              <CustomInput labelText="Длинна" value={createRowLength} handleChange={ChangeRowLength}/>
+              <CustomButton label="Создать" onClick={() => {postNewRow(createRowName, createRowDescription, createRowLength, props.fieldId); setShowCreateModal(false)}}/>
             </div>
           </Modal>
         </div>

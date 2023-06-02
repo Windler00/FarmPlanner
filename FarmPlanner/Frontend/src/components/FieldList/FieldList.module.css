@@ -10,6 +10,7 @@
     position:fixed;
     overflow-y: scroll;
     overflow-x: hidden;
+    margin-top: 100px;
   }
   
   .FieldList ul {
@@ -19,12 +20,6 @@
     width: 100%;
   }
 
-  .CloseLeftBar button{
-    margin: 22px;
-    height: 56px;
-    width: 100px;
-    font-weight: bold;
-  }
   
   .FieldList li {
     padding: 8px;

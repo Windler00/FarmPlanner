@@ -1,29 +1,16 @@
 .header{
-    display: inline-flex;
+    display: flex;
     flex-direction: row;
-    min-height: 100px;
-    align-items: center;
-}
-.searchBar{
-    display: inline-flex;
-    flex-direction: row;
-    margin: 20px;
+    height: 100px;
 }
 .header a{
-    margin: 12px;
-    width: 82px;
-    height: 38px;
-    max-width: 100px;
-    align-items: center;
-    justify-content: center;
-    font-family: "Arial";
+    margin-left: 20px;
 }
 .header button {
-    margin: 12px;
-    min-width: 100px;
-    min-height: 56px;
+    margin: 22px;
+    width: 60px;
+    height: 56px;
     background-color: white;
-    font-weight: bold;
 }
 
 .app{
