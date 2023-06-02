@@ -5,7 +5,7 @@ namespace FarmPlanner.Services
 {
     public class RowService
     {
-        public static object AddRow(Row newRow)
+        public static async Task<object> AddRow(Row newRow)
         {
             using (AppContext db = new AppContext())
             {
@@ -15,7 +15,7 @@ namespace FarmPlanner.Services
             }
         }
 
-        public static List<Row> GetRowByFieldId(int id)
+        public static async Task<List<Row>> GetRowByFieldId(int id)
         {
             using (AppContext db = new AppContext())
             {
@@ -29,19 +29,23 @@ namespace FarmPlanner.Services
             }
         }
 
-        public static object UpdateRow(Row row)
+        public static async Task<object> UpdateRow(Row row)
         {
             using (AppContext db = new AppContext())
             {
                 var toChange = db.Rows.Find(row.Id);
                 toChange.Name = row.Name;
                 toChange.Description = row.Description;
+                UpdateSeedList(row);
+                toChange.Quantity = row.Quantity;
+                toChange.Length = row.Length;
+                toChange.Width = row.Width;
                 db.SaveChanges();
                 return row;
             }
         }
 
-        public static object DeleteRow(int id)
+        public static async Task<object> DeleteRow(int id)
         {
             using (AppContext db = new AppContext())
             {
@@ -53,7 +57,7 @@ namespace FarmPlanner.Services
             }
         }
 
-        public static void DeleteByFieldId(int fieldId)
+        public static async Task DeleteByFieldId(int fieldId)
         {
             using (AppContext db = new AppContext())
             {

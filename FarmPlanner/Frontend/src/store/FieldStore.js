@@ -32,11 +32,15 @@ class FieldStore {
         await this.fetchAll()
     }
 
-    async UpdateField(id, name, description){
+    async UpdateField(id, name, description, length, width, schemaRow, schemaId){
         await axios.put(config.ApiUrl +'/api/field/', {
                 id: id,
                 name: name,
-                description: description
+                description: description,
+                length: length,
+                width: width,
+                schemaRow: schemaRow,
+                schemaId: schemaId
         });
         this.fetchAll()
     }
@@ -45,6 +49,7 @@ class FieldStore {
         this.fieldById = fieldList;
     }
     setFieldList(fieldList) {
+        fieldList.sort((a, b) => a.schemaRow - b.schemaRow)
         this.fieldList = fieldList;
     }
 }

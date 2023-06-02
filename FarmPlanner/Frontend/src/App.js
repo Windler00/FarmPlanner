@@ -1,13 +1,17 @@
 import {createBrowserRouter,RouterProvider,} from "react-router-dom";
 import './App.css';
 import Layout from "./components/Layout";
-import Field from "./components/Field/Field";
+import Field from "./pages/Field/Field";
+import Categories from "./pages/categories/Categories";
+import Schema from "./pages/schema/Schema"
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout/>,
+    element: <Layout>
+      <Schema/>
+    </Layout>,
   },
   {
     path: "/field/:id",
@@ -15,13 +19,19 @@ const router = createBrowserRouter([
       <Field/>
     </Layout>
   },
+  {
+    path: "/categories",
+    element: <Layout>
+      <Categories/>
+    </Layout>
+  },
 ]);
 
 function App() {
   return (
-    <div className="App">
-      <RouterProvider router={router} />
-    </div>
+      <div className="App">
+        <RouterProvider router={router} />
+      </div>
   );
 }
 

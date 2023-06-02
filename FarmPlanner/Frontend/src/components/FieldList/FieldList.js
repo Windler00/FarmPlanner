@@ -6,6 +6,7 @@ import CustomLink from '../CustomLink/CustomLink';
 import { observer } from 'mobx-react-lite';
 import { useLocation } from 'react-router-dom';
 import FieldStore from '../../store/FieldStore';
+import LeftBarStore from '../../store/LeftBarStore';
 
 
 const FieldList = observer(() => {
@@ -28,15 +29,18 @@ const FieldList = observer(() => {
 
   return (
     <div className={styles.FieldList}>
+      <div className={styles.CloseLeftBar}>
+    	<CustomButton label={"Закрыть"} onClick={() => {LeftBarStore.setInactive()}}/>
+      </div>
       <div className={styles.inputBlock}>
             <CustomInput labelText="Имя" value={createFieldName} handleChange={ChangeCreateFieldName}/>
             <CustomInput labelText="Описание" value={createFieldDescription} handleChange={ChangeCreateFieldDescription}/>
-            <CustomButton onClick={async () => {FieldStore.postField(createFieldName, createFieldDescription)}} label="Создать поле/грядку"/>
+            <CustomButton onClick={async () => {FieldStore.postField(createFieldName, createFieldDescription)}} label="Создать грядку"/>
         </div>
           <ul>
             {FieldStore.fieldList.map((field, index) => (
               <li key={field.id}>
-                <CustomLink to={"/field/" + field.id} name={index+1 + " " + field.name}></CustomLink>
+                <CustomLink to={"/field/" + field.id} name={index+1 + ") " + field.name}></CustomLink>
               </li>
             ))}
           </ul>

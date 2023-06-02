@@ -1,0 +1,51 @@
+.Field {
+    display: flex;
+    flex-direction: column;
+    min-width: calc(100% + 350px);
+    flex-grow: 1;
+    overflow-x: hidden;
+    border: 1px solid #7ed8c3;
+    font-size: 16px;
+    padding: 6px;
+}
+.FieldItem {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    overflow-x: hidden;
+}
+.FieldInfo {
+    display: flex;
+    flex-direction: row;
+}
+.FieldInfo strong{
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.Modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.Modal button{
+    margin-top: 5px;
+}
+.Modal input{
+    margin-top: 5px;
+}
+.Modal label {
+    margin-top: 5px;
+}
+.FieldName{
+    margin-top: 5px;
+}
+.FieldDescription{
+    margin-top: 5px;
+}
