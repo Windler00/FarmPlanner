@@ -18,4 +18,4 @@ server {
 
 pm2 start ./farmplanner
 
-pm2 serve build 8000 --spa
+pm2 serve build 88888 --spa
