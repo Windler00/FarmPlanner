@@ -5,16 +5,15 @@ import config from '../config';
 class RowStore {
     rowList = [];
     rowById = [];
-    currRowIds = [];
     constructor(){
         makeAutoObservable(this);
     }
 
-    async postRow(name, description, quantity, fieldId) {
+    async postRow(name, description, length, fieldId) {
         const result = await axios.post(config.ApiUrl +'/api/row/', {
             name: name,
             description: description,
-            quantity: quantity,
+            length: length,
             fieldId: fieldId,
         });
         this.setRowList(result.data)
@@ -24,23 +23,16 @@ class RowStore {
         await axios.delete(config.ApiUrl +'/api/row/' + id);
     }
 
-    async UpdateRow(id, name, description, quantity, length, width){
+    async UpdateRow(id, name, description){
         await axios.put(config.ApiUrl +'/api/row/', {
                 id: id,
                 name: name,
-                description: description,
-                quantity: quantity,
-                length: length,
-                width: width
+                description: description
         });
     }
 
     async fetchById(id) {
-        this.currRowIds = []
         const result = await axios.get(config.ApiUrl +'/api/row/' + id);
-        result.data.map((row) => {
-            this.currRowIds.push(row.id)
-        })
         this.setRowById(result.data)
     }
 

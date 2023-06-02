@@ -10,7 +10,6 @@ namespace FarmPlanner
         public DbSet<Row> Rows { get; set; } = null;
         public DbSet<Seed> Seeds { get; set; } = null;
 
-        public DbSet<Category> Categories { get; set; } = null;
         public AppContext()
         {
             Database.EnsureCreated();

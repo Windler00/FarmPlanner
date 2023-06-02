@@ -9,10 +9,11 @@ namespace FarmPlanner.Controllers
     [ApiController]
     public class FieldController : ControllerBase
     {
+        //work
         [HttpPost]
-        public async Task<IActionResult> Post(Field newField)
+        public IActionResult Post(Field newField)
         {
-            var result = await AddField(newField);
+            var result = AddField(newField);
             if (result == "this id is already in use")
             {
                 return BadRequest("this id is already in use");
@@ -26,32 +27,36 @@ namespace FarmPlanner.Controllers
                 return Ok(result);
             }
         }
+        //work
         [HttpGet]
-        public async Task<IEnumerable> GetAll()
+        public IEnumerable GetAll()
         {
-            return await GetAllFields();
+            return GetAllFields();
         }
+        //work
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetOne(int id)
+        public IActionResult GetOne(int id)
         {
-            var result = await GetFieldById(id);
+            var result = GetFieldById(id);
             if(result == "Not found")
             {
                 return NotFound();
             }
             return Ok(result);
         }
+        //work
         [HttpPut]
-        public async Task<IActionResult> Update(Field field)
+        public IActionResult Update(Field field)
         {
-            return Ok(await UpdateField(field));
+            return Ok(UpdateField(field));
         }
+        //work
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             using (AppContext db = new AppContext())
             {
-                var result = await DeleteField(id);
+                var result = DeleteField(id);
                 if(result == "Not found")
                 {
                     return NotFound();

@@ -1,7 +1,7 @@
 .RowList{
     display: flex;
     flex-direction: column;
-    margin: 10px;
+    margin-top: 10px;
     flex-wrap: nowrap;
     width: 100%;
     overflow-y: hidden;
@@ -14,29 +14,12 @@
     flex-wrap: nowrap;
     border: 1px solid #7ed8c3;
     font-size: 16px;
-    min-height: 90px;
-    margin-top: 8px;
-    width: 97.7%;
+    align-items: center;
+    height: 90px;
+    margin-top: 5px;
+    width: 100%;
     overflow-y: hidden;
     overflow-x: scroll;
-}
-.InputParameters{
-    display: flex;
-    flex-direction: column;
-}
-.InputParameters input{
-    margin-left: 10px;
-    margin-top: 10px;
-}
-
-.RowInfo{
-    display: flex;
-    flex-direction: column;
-    margin-top: 16px;
-}
-.RowInfo strong{
-    margin-top: 6px;
-    margin-left: 10px;
 }
 
 .row li {

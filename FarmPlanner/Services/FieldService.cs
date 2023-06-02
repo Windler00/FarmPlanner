@@ -5,7 +5,7 @@ namespace FarmPlanner.Services
 {
     public class FieldService
     {
-        public static async Task<object> AddField(Field newField)
+        public static object AddField(Field newField)
         {
             using (AppContext db = new AppContext())
             {
@@ -26,7 +26,7 @@ namespace FarmPlanner.Services
             }
         }
 
-        public static async Task<List<Field>> GetAllFields()
+        public static List<Field> GetAllFields()
         {
             using (AppContext db = new AppContext())
             {
@@ -34,7 +34,7 @@ namespace FarmPlanner.Services
             }
         }
 
-        public static async Task<object> GetFieldById(int id)
+        public static object GetFieldById(int id)
         {
             using (AppContext db = new AppContext())
             {
@@ -49,7 +49,7 @@ namespace FarmPlanner.Services
             }
         }
 
-        public static async Task<object> UpdateField(Field field)
+        public static object UpdateField(Field field)
         {
             using (AppContext db = new AppContext())
             {
@@ -58,17 +58,13 @@ namespace FarmPlanner.Services
                 {
                     toChange.Name = field.Name;
                     toChange.Description = field.Description;
-                    toChange.Length = field.Length;
-                    toChange.Width = field.Width;
-                    toChange.SchemaId = field.SchemaId;
-                    toChange.SchemaRow = field.SchemaRow;
                     db.SaveChanges();
                 }
                 return toChange;
             }
         }
 
-        public static async Task<object> DeleteField(int id)
+        public static object DeleteField(int id)
         {
             using (AppContext db = new AppContext())
             {

@@ -10,41 +10,34 @@ namespace FarmPlanner.Controllers
     [ApiController]
     public class RowController : ControllerBase
     {
+        //work
         [HttpPost]
-        public async Task<IActionResult> Post(Row newRow)
+        public IActionResult Post(Row newRow)
         {
-            var result = await AddRow(newRow);
-            await FillSeedList(newRow.Id);
+            var result = AddRow(newRow);
+            FillSeedList(newRow.Id);
             if (result == "this id is already in use")
             {
                 return BadRequest("this id is already in use");
             }
             return Ok(result);
         }
-        [HttpGet]
-        public async Task<IActionResult> GetRows()
-        {
-            using (AppContext db = new AppContext())
-            {
-                var rows = db.Rows.ToList();
-                return Ok(rows);
-            }
-        }
-
+        //work
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetByFieldId(int id)
+        public IActionResult GetByFieldId(int id)
         {
-            var result = await GetRowByFieldId(id);
+            var result = GetRowByFieldId(id);
             if (result == null)
             {
                 return NotFound();
             }
             return Ok(result);
         }
+        //work
         [HttpPut]
-        public async Task<IActionResult> Update(Row row)
+        public IActionResult Update(Row row)
         {
-            var result = await UpdateRow(row);
+            var result = UpdateRow(row);
             if (result == null)
             {
                 return BadRequest();
@@ -54,10 +47,11 @@ namespace FarmPlanner.Controllers
                 return Ok(result);
             }
         }
+        //work
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
-            return Ok(await DeleteRow(id));
+            return Ok(DeleteRow(id));
         }
     }
 }
