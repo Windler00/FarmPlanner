@@ -165,10 +165,14 @@ const Schema = observer(() =>{
             <Modal active={isActiveModal} setActive={setIsActiveModal}>
                 <div className={styles.ModalField}>
                     <div className={styles.FieldInfo}>
-                        <strong>Ряд грядок</strong>
-                        <InputNumber min={0} defaultValue={schemaRow} onChange={setSchemaRow}></InputNumber>
-                        <strong>Номер</strong>
-                        <InputNumber min={0} defaultValue={schemaId} onChange={setSchemaId}></InputNumber>
+                        <div>
+                            <strong>Ряд грядок</strong>
+                            <InputNumber min={0} defaultValue={schemaRow} onChange={setSchemaRow}></InputNumber>
+                        </div>
+                        <div>
+                            <strong>Номер</strong>
+                            <InputNumber min={0} defaultValue={schemaId} onChange={setSchemaId}></InputNumber>
+                        </div>
                         <CustomButton label={"Изменить"} onClick={() => {FieldStore.UpdateField(fieldId,fieldName,fieldDescription,fieldLength,fieldWidth,schemaRow,schemaId); setIsActiveModal(false)}}/>
                     </div>
                     <div className={styles.Rows}>
