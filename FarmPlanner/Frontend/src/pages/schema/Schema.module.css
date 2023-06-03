@@ -65,3 +65,9 @@
     flex-direction: row;
     overflow-x: scroll;
 }
+.FieldInput{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 3px;
+}

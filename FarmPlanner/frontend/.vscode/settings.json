@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "192.168.100.22",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "winserver",
+            "database": "farm_planner",
+            "username": "winserver",
+            "password": "win"
+        }
+    ]
+}
